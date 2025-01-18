@@ -36,18 +36,144 @@ nav ul li a.active{
 }
 
 
-.container{
+/**Home page**/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 160px); /* Accounting for nav and footer height */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 80vh;
 }
 
-/**Home page**/
+.header {
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.header h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: #3f51ec;
+}
+
+.users {
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.users .table {
+  margin-bottom: 0;
+}
+
+.users thead {
+  background-color: #3f51ec;
+  color: white;
+}
+
+.users th {
+  padding: 1rem !important;
+  font-weight: 500;
+  border: none !important;
+}
+
+.users td {
+  padding: 0.8rem 1rem !important;
+  vertical-align: middle;
+}
+
+.users tbody tr:hover {
+  background-color: #f8f9ff !important;
+  transition: background-color 0.2s ease;
+}
 
 /**Home page end **/
 
 /** Create page **/
+.create-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: calc(100vh - 160px);
+}
+
+.create-card {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.create-card .card-header {
+  background-color: #3f51ec;
+  color: white;
+  border-radius: 8px 8px 0 0 !important;
+  padding: 1rem;
+}
+
+.create-card .card-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.create-card .card-body {
+  padding: 2rem;
+}
+
+.create-card .form-label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.create-card .form-control {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  transition: border-color 0.2s ease;
+}
+
+.create-card .form-control:focus {
+  border-color: #3f51ec;
+  box-shadow: 0 0 0 0.2rem rgba(63, 81, 236, 0.25);
+}
+
+.create-card .btn-primary {
+  background-color: #3f51ec;
+  border-color: #3f51ec;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.create-card .btn-primary:hover {
+  background-color: #2c3bb8;
+  border-color: #2c3bb8;
+  transform: translateY(-1px);
+}
+
+.create-card .btn-primary:active {
+  transform: translateY(0);
+}
 
 /** Create page end **/
 
