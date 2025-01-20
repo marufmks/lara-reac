@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 import Footer from "../components/Footer";
-
+import http from "../http";
+import { Link } from "react-router-dom";
 const Home = () => {
   const [users, setUsers] = useState([]);
 
@@ -13,9 +13,8 @@ const Home = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/users");
-      const data = await response.json();
-      setUsers(data);
+      const response = await http.get("/users");
+      setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -39,14 +38,22 @@ const Home = () => {
             </thead>
             <tbody>
               {users.map((user) => (
-                  <tr key={user.id}>
+                <tr key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>
-                  <Button variant="primary">View</Button>&nbsp;
-                  <Button variant="warning">Edit</Button>&nbsp;
-                  <Button variant="danger">Delete</Button>
+                    <Link className="btn btn-primary" to={`/view/${user.id}`}>
+                      View
+                    </Link>
+                    &nbsp;
+                    <Link className="btn btn-warning" to={`/edit/${user.id}`}>
+                      Edit
+                    </Link>
+                    &nbsp;
+                    <Link className="btn btn-danger" to={`/delete/${user.id}`}>
+                      Delete
+                    </Link>
                   </td>
                 </tr>
               ))}

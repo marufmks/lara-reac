@@ -1,18 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Card, Row, Col } from "react-bootstrap";
 import Footer from "../components/Footer";
 import http from "../http";
 import { useNavigate } from "react-router-dom";
-const Create = () => {
+import { useParams } from "react-router-dom";
+
+const Edit = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await http.get(`/users/${id}`);
+      setName(response.data.name || '');
+      setEmail(response.data.email || '');
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      navigate('/');
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { name, email, password };
-    http.post("/users", user)
+    const user = { name, email};
+    http.put(`/users/${id}`, user)
       .then((response) => {
         console.log(response);
         navigate("/");
@@ -27,7 +45,7 @@ const Create = () => {
           <Col md={8} lg={6}>
             <Card className="create-card">
               <Card.Header className="text-center">
-                <h2>Create New User</h2>
+                <h2>Edit User</h2>
               </Card.Header>
               <Card.Body>
                 <Form onSubmit={handleSubmit}>
@@ -53,20 +71,9 @@ const Create = () => {
                     />
                   </Form.Group>
 
-                  <Form.Group className="mb-4">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
-
                   <div className="d-grid">
                     <Button variant="primary" type="submit" size="lg">
-                      Create User
+                      Update User
                     </Button>
                   </div>
                 </Form>
@@ -80,4 +87,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;
